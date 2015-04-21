@@ -1,6 +1,6 @@
 """
 Class description.
-Hack hack hack. 
+Hack hack hack.
 
 I said two lines. At least.
 
@@ -11,6 +11,13 @@ did!
 
 I made some beautfication in the documentation.
 
+Let's see if this changes in the documentation will
+lead to some conficts. 
+
+Yes it did. But I solved the conflict and kept the stuff
+of Carlos anyway...
+
+I did some weird stuff in the documentation. And then some more stuff.
 """
 from distutils.cmd import Command
 from distutils.core import setup
@@ -20,14 +27,23 @@ import os
 
 import sys
 
-print 'Path to the Python executable', sys.executable()
+print('Path to the Python executable', sys.executable())
 
-class data(Command):
 
-    description = "Convert the NIST databas of constants"
+class Data(Command):
+
+    """
+    Data Class
+
+    Class 
+
+    Parameters
+    ----------
+    """
+
+    description = "Convert the NIST database of constants"
 
     user_options = []
-
     boolean_options = []
 
     def initialize_options(self):
@@ -56,21 +72,21 @@ class data(Command):
                 f.write("physical_constants['%s'] = %s\n"%(name, d))
 
 
-class sdist(_sdist):
+class SDist(_sdist):
 
     def run(self):
         self.run_command('data')
         _sdist.run(self)
 
 
-class build(_build):
+class Build(_build):
 
     def run(self):
         self.run_command('data')
         _build.run(self)
 
 
-class test(Command):
+class Test(Command):
 
     """Run the test suite."""
 
@@ -125,10 +141,10 @@ setup(
 #        Topic :: Scientific/Engineering
 #        """,
     cmdclass = {
-        'build': build,
-        'data': data,
-        'sdist': sdist,
-        'test': test,
+        'build': Build,
+        'data': Data,
+        'sdist': SDist,
+        'test': Test,
         },
     description = "Support for physical quantities with units, based on numpy",
     download_url = "http://pypi.python.org/pypi/quantities",
